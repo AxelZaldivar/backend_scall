@@ -1,10 +1,12 @@
 import os
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
 
 app = Flask(__name__)
+CORS(app)  # Habilita CORS para todas las rutas
 
 # Cargar el modelo
 model = keras.models.load_model("model.h5")
