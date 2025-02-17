@@ -6,10 +6,14 @@ import tensorflow as tf
 from tensorflow import keras
 
 app = Flask(__name__)
-CORS(app)  # Habilita CORS para todas las rutas
+CORS(app, resources={r"/*": {"origins": "*"}})  # Permite todas las solicitudes
 
 # Cargar el modelo
 model = keras.models.load_model("model.h5")
+
+@app.route("/predict", methods=["OPTIONS"])
+def handle_options():
+    return '', 200
 
 @app.route("/predict", methods=["POST"])
 def predict():
